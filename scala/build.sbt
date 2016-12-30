@@ -22,5 +22,6 @@ lazy val front = (project in file("front"))
   .settings(commonSettings)
   .dependsOn(core)
   .settings(
+    unmanagedSourceDirectories in Compile <++= unmanagedSourceDirectories in core in Compile,
     scalaJSModuleKind := ModuleKind.CommonJSModule
   ).enablePlugins(ScalaJSPlugin)
