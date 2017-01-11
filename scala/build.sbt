@@ -1,5 +1,9 @@
 name := """scalajsDDDSample"""
 
+organization := "com.github.uryyyyyyy"
+scalaVersion := "2.11.8"
+version := "0.1.0"
+
 lazy val commonSettings = Seq(
   organization := "com.github.uryyyyyyy",
   scalaVersion := "2.11.8",
@@ -23,5 +27,6 @@ lazy val front = (project in file("front"))
   .dependsOn(core)
   .settings(
     unmanagedSourceDirectories in Compile <++= unmanagedSourceDirectories in core in Compile,
-    scalaJSModuleKind := ModuleKind.CommonJSModule
+    scalaJSModuleKind := ModuleKind.CommonJSModule,
+    libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.1"
   ).enablePlugins(ScalaJSPlugin)

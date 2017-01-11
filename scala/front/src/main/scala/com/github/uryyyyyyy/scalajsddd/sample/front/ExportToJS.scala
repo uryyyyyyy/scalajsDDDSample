@@ -4,6 +4,12 @@ import com.github.uryyyyyyy.scalajsddd.sample.domain.ToDo
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExport
+import org.scalajs.dom.experimental.{Fetch, ReadableStream, Response}
+
+import scala.concurrent.Future
+import scala.scalajs.js.typedarray.Uint8Array
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.scalajs.js.JSConverters._
 
 @JSExport("ExportToJS")
 object ExportToJS {
@@ -41,6 +47,14 @@ object ExportToJS {
       ToDo(todo.id, todo.title, todo.finished)
     })
     result.asInstanceOf[js.Promise[ToDo]]
+  }
+
+  @JSExport
+  def fetch2(url :String): js.Promise[ReadableStream[Uint8Array]] = {
+    Fetch.fetch(url).toFuture.map(r => {
+      println(r.body)
+      r.body
+    }).toJSPromise
   }
 }
 
